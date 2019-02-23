@@ -1,0 +1,37 @@
+- name: Provisioning of AWS resources
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: create a security group 
+    ec2_group:
+      name: app-sg
+      description: an example ec2 group
+      region: "{{ region.value }}"
+      rules:
+       - proto: tcp
+         from_port: 22
+         to_port: 22
+         cidr_ip: 0.0.0.0/0
+      register: security_group  
+    ignore_errors: yes
+
+    
+  - name: create ec2 instance
+    ec2:
+      key_name: "{{ keypair.value }}"
+      instance_type: "{{ instance_type.value }}"
+      image: "{{ instance_image.value }}"
+      wait: yes
+      group: security_group.id
+      region: "{{ region.value }}"
+      count_tag:
+        Name: "{{ instance_name.value }}"
+      exact_count: 1
+      state: present
+      assign_public_ip: yes
+    register: ec2
+
+    
+

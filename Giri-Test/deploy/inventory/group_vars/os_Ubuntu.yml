@@ -1,0 +1,6 @@
+---
+ansible_connection: ssh
+ansible_user: utp
+ansible_port: 22
+ansible_ssh_pass: Oct0pus08!!
+ansible_become_pass: Oct0pus08!!
