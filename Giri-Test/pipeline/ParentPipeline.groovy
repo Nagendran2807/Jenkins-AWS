@@ -36,5 +36,15 @@ node {
 	stage('Start') {
 		println "Pipeline started"
 	}
+
+	stage('Pre-Build Check') {  // Verify all parameters and variables
+		try {
+			if(!GIT_BRANCH) { throw new IllegalArgumentException('GIT_BRANCH cannot be null') }
+			if(!GIT_URL) { throw new IllegalArgumentException('GIT_BRANCH cannot be null') }
+			if(!GIT_CREDENTIALS) { throw new IllegalArgumentException('GIT_BRANCH cannot be null') }
+		} catch (Exception e) {
+		println "Pre-Build check failed"
+		}
+	}	
 	
 }
