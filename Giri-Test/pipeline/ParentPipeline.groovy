@@ -45,6 +45,61 @@ node {
 		} catch (Exception e) {
 		println "Pre-Build check failed"
 		}
-	}	
+	}
+
+	stage('Checkout') {  //Checkout from Git and read the Input file.		
+		TreeMap result = gitCheckout(GIT_URL, GIT_BRANCH, gitCredentialsId, true)
+		}	
 	
+}
+
+
+
+def gitCheckout(String gitUrl, String branch, String gitCredentialsId, boolean deletePreviousContent) {
+	//Checkout from Git and read the Input file.
+	println "----------------------------------------------------------"
+	println "Starting CHECKOUT from git Repo " + gitUrl
+	
+	Integer gitTries = 0
+	Integer gitMaxTries = 1	
+	TreeMap result
+	while(true) {
+		try {
+			if (deletePreviousContent) {
+				deleteDir()
+			}
+			result = checkout(
+				poll: false,
+				scm: [
+					$class: 'GitSCM',
+					branches: [
+						[
+							name: branch
+						]
+					], 
+					doGenerateSubmoduleConfigurations: false,
+					extensions: [
+						[$class: 'WipeWorkspace'],
+						[$class: 'CloneOption', noTags: false, reference: '', shallow: true]
+					],
+					submoduleCfg: [], 
+					userRemoteConfigs: [
+						[
+							credentialsId: gitCredentialsId, 
+							url: gitUrl
+						]
+					]
+				]
+			)
+			return result
+			break
+		} catch(Exception ex) {
+			if(gitTries++ >= gitMaxTries) {
+				prinltln "Failed to checkout")
+			}
+			sleep 60
+		}
+	}
+	println "Completed CHECKOUT from git Repo " + gitUrl
+	println "----------------------------------------------------------"
 }
