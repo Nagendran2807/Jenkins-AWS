@@ -39,8 +39,6 @@ node('acs') {
 	}
 	
 	stage('Pre-Build Check') {  // Verify all parameters and variables
-		alert = new Alert(MANIFEST_SERVER_URL, BUILD_NUMBER.toInteger(), BUILD_URL.toURL(), Level.WARNING, JOB_NAME.split('/').last(), this, TENANT_ID)
-		alert.console(Level.INFO, "Starting the Pre-Build stage")
 		try {
 			if(!GIT_BRANCH) { throw new IllegalArgumentException('GIT_BRANCH cannot be null') }
 			if(!GIT_URL) { throw new IllegalArgumentException('GIT_BRANCH cannot be null') }
