@@ -31,7 +31,7 @@ final gitCredentialsId = GIT_CREDENTIALS
 @Field String MANIFEST_ID = '' // The Manifest ID for the run.
 @Field String BUILD_TIME = '' // The build time of the run.
 
-node('acs') {
+node {
 	// Pre-Build steps
 	stage('Start') {
 		println "Pipeline started"
