@@ -15,7 +15,6 @@ import groovy.transform.Field
 import hudson.console.ModelHyperlinkNote
 import java.text.SimpleDateFormat
 import java.util.logging.Level
-import jenkins.plugins.http_request.ResponseContentSupplier
 import jenkins.plugins.http_request.util.*
 import hudson.remoting.ChannelClosedException
 import hudson.slaves.DumbSlave
