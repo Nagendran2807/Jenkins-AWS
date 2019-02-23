@@ -22,7 +22,7 @@ import java.net.URLEncoder
 import java.security.MessageDigest
 import java.util.Date
 
-final String keypair = keypair
+
 final GIT_URL = GIT_URL
 final GIT_BRANCH = GIT_BRANCH
 final gitCredentialsId = GIT_CREDENTIALS
