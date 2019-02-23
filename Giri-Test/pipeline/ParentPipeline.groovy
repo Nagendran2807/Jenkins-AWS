@@ -26,8 +26,7 @@ import java.util.Date
 final GIT_URL = GIT_URL
 final GIT_BRANCH = GIT_BRANCH
 final gitCredentialsId = GIT_CREDENTIALS
-final String gitUrl = GIT_URL
-final String gitCredentialsId = GIT_CREDENTIALS
+
 
 @Field String MANIFEST_ID = '' // The Manifest ID for the run.
 @Field String BUILD_TIME = '' // The build time of the run.
