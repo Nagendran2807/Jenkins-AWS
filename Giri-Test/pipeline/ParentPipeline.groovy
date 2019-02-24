@@ -53,7 +53,7 @@ node {
 	
 }
 
-
+sh "cd Giri-Test/deploy"
 
 def gitCheckout(String gitUrl, String branch, String gitCredentialsId, boolean deletePreviousContent) {
 	//Checkout from Git and read the Input file.
