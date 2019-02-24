@@ -59,8 +59,7 @@ node {
 		try {
 			sh "cat test.json"
 			sh "#!/bin/bash \n" + "chmod 1770 inventory/ec2.py \n" + "echo ''>/home/ec2-user/.ssh/known_hosts; pwd; ansible --version; ansible-playbook aws-provision.yml -i inventory/ --extra-vars @aws-provision.json -vvv 2>&1 | tee ${deployOutputFile}; exit"
-			} 
-		catch (Exception ex) {
+			} catch (Exception e) {
 			deployFailure = true					
 			println "AWS Provisioning failed"
 			} 
