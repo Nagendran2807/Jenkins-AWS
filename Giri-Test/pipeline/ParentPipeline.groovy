@@ -52,19 +52,15 @@ node {
 		}	
 	
 	stage('Provision') {
-		Map pdMap = [:]
 		dir('Giri-Test/deploy')
 		Boolean deployFailure = false
 		String deployOutputFile = "aws-provision-output.txt"
 		try {
 			sh "cat test.json"
 			sh "#!/bin/bash \n" + "chmod 1770 inventory/ec2.py \n" + "echo ''>/home/ec2-user/.ssh/known_hosts; pwd; ansible --version; ansible-playbook aws-provision.yml -i inventory/ --extra-vars @aws-provision.json -vvv 2>&1 | tee ${deployOutputFile}; exit"
-			} catch (Exception e) {
-			deployFailure = true					
+		} catch (Exception e) {					
 			println "AWS Provisioning failed"
-			} 
-			
-
+		} 
 	}	
 }
 
