@@ -52,7 +52,7 @@ node {
 		}	
 	
 	stage('Provision') {
-		dir('Giri-Test/deploy')
+		dir('Giri-Test/provision')
 		{
 			Boolean deployFailure = false
 			String deployOutputFile = "aws-provision-output.txt"
