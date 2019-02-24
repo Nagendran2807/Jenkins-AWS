@@ -4,34 +4,32 @@
   gather_facts: no
 
   tasks:
-  - name: create a security group 
+  - name: create a security group
     ec2_group:
       name: app-sg
       description: an example ec2 group
-      region: "{{ region.value }}"
+      region: "us-east-1"
       rules:
        - proto: tcp
          from_port: 22
          to_port: 22
          cidr_ip: 0.0.0.0/0
-      register: security_group  
+    register: "sg"
     ignore_errors: yes
 
-    
+  - name: print security group variable
+    debug:
+      msg: "Security group ID: '{{ sg.group_id }}'"
+
   - name: create ec2 instance
     ec2:
       key_name: "{{ keypair.value }}"
       instance_type: "{{ instance_type.value }}"
       image: "{{ instance_image.value }}"
       wait: yes
-      group: security_group.id
+      group_id: "{{ sg.group_id }}"
       region: "{{ region.value }}"
-      count_tag:
-        Name: "{{ instance_name.value }}"
-      exact_count: 1
+      instance_tags: '{"Name":"test-websg"}'
+      count: 1
       state: present
-      assign_public_ip: yes
     register: ec2
-
-    
-

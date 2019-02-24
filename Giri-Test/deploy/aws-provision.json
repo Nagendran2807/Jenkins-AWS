@@ -1,0 +1,7 @@
+{
+    "keypair": { "value": "test-giri" },
+    "instance_type": { "value": "t2.micro" },
+    "instance_image": { "value": "ami-035be7bafff33b6b6" },
+    "region": { "value": "us-east-1" },
+    "instance_name": { "value": "app-test" },
+}
